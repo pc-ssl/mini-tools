@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  Array.prototype.filter = function (fn) {
+    const result = []
+    for (let i = 0; i < this.length; i++) {
+      if (!this.hasOwnProperty(i)) continue
+      const current = fn(this[i], i, this)
+      if (current) {
+        result.push(this[i])
+      }
+    }
+    return result
+  }
+  const a = [1, 2, 3].filter(item => item === 1)
+  console.log(a)
+</script>

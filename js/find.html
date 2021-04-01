@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组-find</title>
+  </head>
+
+  <body></body>
+</html>
+
+<script>
+  Array.prototype.find = function (cb) {
+    let current
+    for (let i = 0; i < this.length; i++) {
+      if (!this.hasOwnProperty(i)) continue
+      const result = cb(this[i], i, this)
+      if (result) {
+        current = this[i]
+      }
+    }
+    return current
+  }
+  const a = [{ a: 1 }, { b: 1 }].find(item => item.a === 1)
+  console.log(a)
+</script>

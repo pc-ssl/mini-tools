@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组-Map方法</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  Array.prototype.map = fn => {
+    const result = []
+    for (let i = 0; i < this.length; i++) {
+      //处理稀疏数组的情况
+      // 稀疏数组：[1,,2]  这样子的数组
+      if (!this.hasOwnProperty(i)) continue
+      result.push(fn(this[i], i, this))
+    }
+    return result
+  }
+</script>

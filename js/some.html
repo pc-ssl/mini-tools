@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组-some</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  Array.prototype.some = function (fn) {
+    let bool = false
+    for (let i = 0; i < this.length; i++) {
+      if (!this.hasOwnProperty(i)) {
+        continue
+      }
+      if (fn(this[i], i, this)) {
+        bool = true
+        break
+      }
+    }
+    return bool
+  }
+  const a = [1, 2, 3].some(item => {
+    return item === 1
+  })
+  console.log(a)
+</script>

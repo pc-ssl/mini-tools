@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>函数柯里化</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  const curry = cb => {
+    // 缓存参数
+    let params = []
+    const next = (...arg) => {
+      params = [...params, ...arg]
+      if (params.length < cb.length) {
+        return next
+      } else {
+        // 等参数够回调函数的参数位数了就执行真正的回调，也就是 sum.apply(sum,params)
+        return cb.apply(cb, params)
+      }
+    }
+    return next
+  }
+
+  const sum = (a, b, c) => {
+    return a + b + c
+  }
+
+  const fn = curry(sum)
+  const res = fn(1, 2)(2)
+
+  console.log(res)
+</script>

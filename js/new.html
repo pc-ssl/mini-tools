@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现New方法</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  function myNew (...arg) {
+    const [fn, ...other] = arg
+    const target = Object.create(fn.prototype)
+    const res = fn.apply(target, other)
+    if (res && (typeof res === 'object' || typeof res === 'function')) {
+      return res
+    }
+    return target
+  }
+</script>
