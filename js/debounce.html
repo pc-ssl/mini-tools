@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖，节流</title>
+  </head>
+  <body>
+      <div id="layout" style="width: 200px;height: 300px;"></div>
+  </body>
+</html>
+<script>
+  function debounce (fn, wait) {
+    let timer
+    return function (...arg) {
+      const context = this
+      clearTimeout(timer)
+      timer = setTimeout(() => fn.apply(context, arg), wait)
+    }
+  }
+
+  var node = document.getElementById('layout')
+  var count=0
+  function getUserAction (e) {
+    console.log(this, e) // 分别打印：node 这个节点 和 MouseEvent
+    node.innerHTML = count++
+  }
+  node.onmousemove = debounce(getUserAction, 1000)
+</script>

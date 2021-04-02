@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  const urls = [
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58',
+    'https://dss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1401878636,1957300882&fm=58'
+  ]
+  function loadImage (url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image()
+      img.onload = function () {
+        resolve(img)
+      }
+      img.onerror = reject
+      img.src = url
+    })
+  }
+
+  function transToPromise (urls) {
+    for (let i = 0; i < urls.length; i++) {
+      urls[i] = loadImage(urls[i])
+    }
+    console.log(urls)
+  }
+
+  function syncLoad (index) {
+    debugger
+
+    if (index >= urls.length) return
+    loadImage(urls[index]).then(img => {
+      // process img
+      addToHtml(img)
+      syncLoad(index++)
+    })
+  }
+
+  function addToHtml (img) {
+    console.log('加入的图片', img)
+  }
+
+  transToPromise(urls)
+  syncLoad(0)
+</script>
