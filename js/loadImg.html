@@ -41,9 +41,7 @@
   }
 
   function syncLoad (index) {
-    debugger
-
-    if (index >= urls.length) return
+    if (index >= urls.lengh) return
     loadImage(urls[index]).then(img => {
       // process img
       addToHtml(img)
